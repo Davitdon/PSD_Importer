@@ -1,0 +1,109 @@
+[gd_scene load_steps=2 format=3 uid="uid://d04rd2uiohnyn"]
+
+[ext_resource type="Script" path="res://addons/psd_importer/assets/gui/drag_psd_here.gd" id="1_mr0w5"]
+
+[node name="psd_load" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mr0w5")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 487.0
+offset_top = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HELP I WANT TO CHANGE IT 
+TO SCENE WHEN YOU PRESS 
+AN IMPORT TYPE, IT SAVES 
+TIME HOW DO I DO THAT?!"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="DefaultFileSystem" type="Button" parent="GridContainer/VBoxContainer"]
+layout_mode = 2
+text = "CheckFileSystem"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="GridContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="GridContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(350, 300)
+layout_mode = 2
+color = Color(0.190762, 0.190762, 0.190762, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GridContainer/VBoxContainer/HBoxContainer2/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Drag and drop psd files here
+
+Import as Item (Good for different directions)
+Adds all sprites in one animatedSprite2D
+
+
+Import as Frame (doesn't work)
+Works like as a normal psd
+
+Import 8 directiona 
+Doesnt workl (
+Choose the amount of directions you have
+Create x amount of items with x many directions 
+)
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Item" type="Button" parent="GridContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(115, 115)
+layout_mode = 2
+text = "Item"
+
+[node name="Frame" type="Button" parent="GridContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(115, 115)
+layout_mode = 2
+text = "Frame"
+
+[node name="8DFrame" type="Button" parent="GridContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(115, 115)
+layout_mode = 2
+text = "↖↑↗
+← 8D Frame→
+↙  ↓  ↘"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open a File"
+size = Vector2i(648, 360)
+ok_button_text = "Open"
+file_mode = 0
+root_subfolder = "res://psd_folder/"
+filters = PackedStringArray("*psd ; Layers")
+show_hidden_files = true
+use_native_dialog = true
+
+[connection signal="pressed" from="GridContainer/VBoxContainer/DefaultFileSystem" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/HBoxContainer/Item" to="." method="_on_item_pressed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/HBoxContainer/Frame" to="." method="_on_frame_pressed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/HBoxContainer/8DFrame" to="." method="_on_d_frame_pressed"]
+[connection signal="confirmed" from="FileDialog" to="." method="_on_file_dialog_confirmed"]
