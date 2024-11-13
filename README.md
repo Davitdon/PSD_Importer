@@ -1,9 +1,9 @@
-Dragging and dropping psds doesn't work.
+Dragging and dropping psds from file system doesn't work.
 I was too lazy to find out the solution
 
 So I made a PSD Importer Dock,
 
-Drag and Drop a .psd file into the PSD_Importer Dock 
+Drag and Drop a .psd file into the PSD_Importer Dock (From External external file system)
 or
 Press the CheckFileSystem, Find your PSD file
 
