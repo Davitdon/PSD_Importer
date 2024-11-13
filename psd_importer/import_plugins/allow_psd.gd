@@ -28,10 +28,8 @@ func _get_preset_name(preset_index):
 func _get_import_options(path, preset_index):
 	return []
 
-func _import(source_file, save_path, options, platform_variants, gen_files):
-	var texture = load("res://assets/gui/test.tscn")
-	
-	print(source_file) #res::/path/to/.psd
-	return texture
+func _import(source_file, save_path, options, platform_variants, gen_files):	
+	#print(source_file) #res::/path/to/.psd
+	return OK
 	
 	
