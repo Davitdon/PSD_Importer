@@ -3,6 +3,9 @@ extends Control
 
 @onready var csharp_path = preload("res://addons/psd_importer/Main.cs")
 
+@onready var psd_options: OptionButton = $GridContainer/VBoxContainer/HBoxContainer/psdOptions
+
+
 signal button_pressed()
 
 var path : String 
@@ -32,20 +35,20 @@ func _on_files_dropped(files): #Check if first file has .psd extension
 	
 
 "Doesn't work right now"
-func _on_d_frame_pressed() -> void: #8D Frame #When your making a game and you have an omnidirectional character
+func make_8d_frames() -> void: #8D Frame #When your making a game and you have an omnidirectional character
 	emit_signal("button_pressed")
 	
 	#8 Sprite2d for each body part
 	pass # Replace with function body.
 
 "Good old fasion psd (Doesn't work)"
-func _on_frame_pressed() -> void: #Regular Psd style
+func make_frames() -> void: #Regular Psd style
 	emit_signal("button_pressed")
 	
 	# Bring the dock to the front
 	if path:
 		var csharp = csharp_path.new()
-		var output = csharp.PsdLayersToPngs(path, 0) #Type Images
+		var output = csharp.PsdLayersToPngs(path, 0, '') #Type Images
 		#var output: [Images, Names]
 		"I need to get the name of the images somehow"
 		
@@ -53,13 +56,15 @@ func _on_frame_pressed() -> void: #Regular Psd style
 		var selection := EditorInterface.get_selection().get_selected_nodes()
 		if selection.size() > 0:
 			var i = 0
-			for image in output: #Checks images 
+			for data in output: #Checks images 
+				var image = data[0]
+				var image_name = data[1]
 				var sprite : Sprite2D = Sprite2D.new()
 				var parent = selection.front()
 							
 				parent.add_child(sprite)
 				sprite.owner = parent
-				sprite.name = str(i)
+				sprite.name = str(image_name)
 				
 				var image_texture = ImageTexture.create_from_image(image)
 				sprite.texture = image_texture
@@ -68,11 +73,33 @@ func _on_frame_pressed() -> void: #Regular Psd style
 			print("Done Making Frame")
 
 
-func _on_item_pressed() -> void: #sprite2d sheet of item
+func make_flat():
+	if path:
+		var csharp = csharp_path.new()
+		var output : Array = csharp.PsdToPng(path,'') #[Image, ImageName]
+		var image = output[0]
+		var image_name = output[1]
+		print("Making %s flat" % [image_name])
+		#Output : [[Image][Name]] Supposed to be this way, or a class, but its too much work
+		var selection := EditorInterface.get_selection().get_selected_nodes()
+		if selection.size() > 0:
+			var i = 0
+			var sprite : Sprite2D = Sprite2D.new()
+			var parent = selection.front()
+							
+			parent.add_child(sprite)
+			sprite.owner = parent
+			sprite.name = image_name
+				
+			var image_texture = ImageTexture.create_from_image(image)
+			sprite.texture = image_texture
+				
+
+func make_animated_sprite2d() -> void: #sprite2d sheet of item
 	emit_signal("button_pressed")
 	if path:
 		var csharp = csharp_path.new()
-		var images = csharp.PsdLayersToPngs(path, 0) #Type Images
+		var output = csharp.PsdLayersToPngs(path, 0,'') #Type Images
 		
 		
 		var selection := EditorInterface.get_selection().get_selected_nodes()
@@ -84,9 +111,11 @@ func _on_item_pressed() -> void: #sprite2d sheet of item
 			
 			parent.add_child(a_sprite)
 			
-			for image in images: #Convert Bytpe To PackedByteArray
-
-				a_sprite.name = "Layer_Sprite"
+			for data in output: #Convert Bytpe To PackedByteArray
+				var image = data[0]
+				var image_name = data[1]
+				
+				a_sprite.name = image_name
 				a_sprite.owner = parent
 
 				var image_texture = ImageTexture.create_from_image(image)
@@ -94,39 +123,32 @@ func _on_item_pressed() -> void: #sprite2d sheet of item
 				a_sprite.sprite_frames.add_frame("direction", image_texture)
 				
 			
-			#Test
-			var packed_data = PackedByteArray()
-			packed_data.append(images[0])
-			var image_texture = ImageTexture.create_from_image(images[0])
-			var sprite = Sprite2D.new()
-			sprite.texture = image_texture
-			parent.add_child(sprite)
-			sprite.owner = parent
-			sprite.name = "ImageTime"
-		
-			#end of test
 		print("Done looping")
 		
 
 
-	
+func _on_import_pressed() -> void:
+	print(psd_options.selected)
+	match psd_options.selected:
+		0:#Frames
+			make_frames()
+		1:#Flat
+			make_flat()
+		2:#AnimatedSprite2D
+			make_animated_sprite2d()
+		3:#8DFrames
+			make_8d_frames()
+			
 
 
-
-
-func _on_button_pressed() -> void:
+func _on_default_file_system_pressed() -> void:
+	#Not important
+	var my_os_path = OS.get_name()
+	match OS.get_name():
+		"Windows":
+			my_os_path = "C:"
+			
 	var file_dialog: FileDialog = $FileDialog
-	file_dialog.popup()
+	var absolute_path =  my_os_path + file_dialog.current_dir
 	
-
-
-	"""
-		0, left
-		1, 34 left
-		2 front
-		3 34 right
-		4 right
-		5 34b right
-		6 34b left
-		7 back
-		"""
+	file_dialog.popup()

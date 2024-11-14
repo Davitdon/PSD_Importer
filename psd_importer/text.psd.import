@@ -1,0 +1,14 @@
+[remap]
+
+importer="PSD Importer"
+type="Texture"
+uid="uid://dt5oavqlvau84"
+path="res://.godot/imported/text.psd-7be38958bdd90b8822cf1ae2deea18f4.png"
+
+[deps]
+
+source_file="res://addons/psd_importer/text.psd"
+dest_files=["res://.godot/imported/text.psd-7be38958bdd90b8822cf1ae2deea18f4.png"]
+
+[params]
+

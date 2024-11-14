@@ -9,16 +9,56 @@ using System.Collections.Generic;
 
 using System.Reflection; //Debugging tool
 
+using ImageMagick;
+
+
 
 
 public partial class Main : Node2D
 {
-	public Godot.Collections.Array<Godot.Image> PsdLayersToPngs(string psdPath, int type_of_psd = 0)// 0 is Frame, 1 is Item, 2,is 8D
+	
+	//Returns Godot Image and FileName in an array
+	public Godot.Collections.Array PsdToPng(string psdPath, string saveToPath = "")
+	{
+		string fileName = System.IO.Path.GetFileName(psdPath);
+		GD.Print("Converting psd to Image");
+		using (var image = new MagickImage(psdPath))
+		{
+			using (var memoryStream = new MemoryStream())
+			{
+				// Set the output format to PNG
+				image.Format = MagickFormat.Png;
+				// Save the image as PNG to the memory stream
+				image.Write(memoryStream);
+
+				// Save to file if a path is provided
+				if (!string.IsNullOrEmpty(saveToPath))
+				{
+					image.Write(saveToPath);
+				}
+
+				// Reset the stream position for loading into Godot.Image
+				memoryStream.Seek(0, SeekOrigin.Begin);
+
+				// Load the PNG data from the memory stream into a Godot.Image
+				var godotImage = new Godot.Image();
+				godotImage.LoadPngFromBuffer(memoryStream.ToArray());
+				
+				var output = (new Godot.Collections.Array { godotImage, fileName });
+				return output;
+			}
+		}
+	}
+
+
+	
+	
+	public Godot.Collections.Array PsdLayersToPngs(string psdPath, int type_of_psd = 0, string saveToPath = "")// 0 is Frame, 1 is Item, 2,is 8D
 	{
 		// Paths for the PSD file and output directory
 		string outputDir = ProjectSettings.GlobalizePath("res://psd_layers_output/");
 		
-		var layerDataList = new Godot.Collections.Array<Godot.Image>();
+		var layerDataList = new Godot.Collections.Array();
 		
 		// Ensure the output directory exists
 		if (!System.IO.Directory.Exists(outputDir))
@@ -27,10 +67,6 @@ public partial class Main : Node2D
 		PhotoshopFiles.PsdFile psd = new PhotoshopFiles.PsdFile();
 		psd.Load(psdPath);
 		
-		/*Future me
-		Iterate through the layers find the biggest layer, and that is the background,
-		For now I'll just use layer 0 as the biggest layer 
-		*/
 		bool is_bg = false; //background  
 		System.Drawing.Image bg_layer = null;
 		int bg_layer_height = 0;
@@ -78,16 +114,20 @@ public partial class Main : Node2D
 					
 					
 					
-					// Add the texture to the layerDataList
-					layerDataList.Add(godotImage);
-
-					// Save to disk
 					string safeLayerName = $"{j}_" + string.Join("_", psd.Layers[j].Name.Split(Path.GetInvalidFileNameChars()));
-					string outputPath = Path.Combine(outputDir, $"{safeLayerName}.png");
+					// Add the texture to the layerDataList
+					
+					layerDataList.Add(new Godot.Collections.Array { godotImage, safeLayerName });
+					// Save to disk
+					if (!string.IsNullOrEmpty(saveToPath))
+					{
+						string outputPath = Path.Combine(saveToPath, $"{safeLayerName}.png");
 
-					File.WriteAllBytes(outputPath, pngData); // Write byte array to file
+						File.WriteAllBytes(outputPath, pngData); // Write byte array to file
+					}
 				}
 			}
+			
 		GD.Print("it work?!");
 		return layerDataList;
 		//I want more information I want to get the x and y position of where to place the image, for each layer
