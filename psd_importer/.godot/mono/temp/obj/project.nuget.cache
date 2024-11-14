@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "quIVHaFrB4mRlCekvCPuKqF+YfDselgpQ/0TsH5BbroVEAm+hZAelDZHkoa/aNSBnlYrl+sQumze2Vc2zu5Jbw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Davitdon\\Documents\\davimation\\addons\\psd_importer\\Davimation.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Davitdon\\.nuget\\packages\\godot.sourcegenerators\\4.3.0\\godot.sourcegenerators.4.3.0.nupkg.sha512",
+    "C:\\Users\\Davitdon\\.nuget\\packages\\godotsharp\\4.3.0\\godotsharp.4.3.0.nupkg.sha512",
+    "C:\\Users\\Davitdon\\.nuget\\packages\\godotsharpeditor\\4.3.0\\godotsharpeditor.4.3.0.nupkg.sha512",
+    "C:\\Users\\Davitdon\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\Davitdon\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\Davitdon\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Davitdon\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
+    "C:\\Users\\Davitdon\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512"
+  ],
+  "logs": []
+}

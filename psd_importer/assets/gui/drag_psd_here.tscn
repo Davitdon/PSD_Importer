@@ -17,13 +17,47 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 487.0
-offset_top = 134.0
+offset_top = 11.0
+offset_bottom = -123.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "HELP I WANT TO CHANGE IT 
 TO SCENE WHEN YOU PRESS 
 AN IMPORT TYPE, IT SAVES 
-TIME HOW DO I DO THAT?!"
+TIME HOW DO I DO THAT?!
+
+
+
+Import 8D Frame (Doesn't work)
+Important: Name your layers like this:
+direction_name 
+#Direction is where what the camera sees, when facing it
+example: front_Head, left_Head, 34left_Head
+Its important to have this syntax when using this import type
+
+
+8D frame means 8 Directional frame
+	frame with same name gets stored together in a animationsprite2d 
+              #Dir    Name #Dir           #Name
+e.g: back_left_ArmL\", front_right_armL
+direction, then name 
+
+ArmL is the name of the 
+ArmL : AnimationSprite2D
+ArmL.animation #direction
+back_left ArmL, front_right armL 
+
+
+	\"\"\"
+		0, left
+		1, 34 left
+		2 front
+		3 34 right
+		4 right
+		5 34b right
+		6 34b left
+		7 back
+		\"\"\""
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -55,18 +89,45 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Drag and drop psd files here
+text = "Click the root node, when your importing the psd file. If you don't, it'll give the ImageTexture property to a child file
 
-Import as Item (Good for different directions)
-Adds all sprites in one animatedSprite2D
+Drag and drop psd files here
+
+Import as Item (animatedSprite2D)
+Adds all sprites as frames in animatedSprite2D
+
+Import as Flat
+(everything goes on one layer)
+
+Import as Frames
+(Multiple Sprite2d) #Supposed to automatically offset itself
 
 
-Import as Frame (doesn't work)
-Works like as a normal psd
+Import 8D Frame (Doesn't work)
+Important: Name your layers like this:
+direction_name 
+#Direction is where what the camera sees, when facing it
+example: front_Head, left_Head, 34left_Head
+Its important to have this syntax when using this import type
 
-Import 8 directiona 
-Doesnt workl (
-Choose the amount of directions you have
+
+8D frame means 8 Directional frame
+	frame with same name gets stored together in a animationsprite2d 
+              #Dir    Name #Dir           #Name
+e.g: back_left_ArmL\", front_right_armL
+direction, then name 
+
+ArmL is the name of the 
+ArmL : AnimationSprite2D
+ArmL.animation #direction
+back_left ArmL, front_right armL 
+
+
+
+so each unique name has 8 unique animations
+
+
+
 Create x amount of items with x many directions 
 )
 "
@@ -74,22 +135,55 @@ Create x amount of items with x many directions
 [node name="HBoxContainer" type="HBoxContainer" parent="GridContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="ColorRect" type="ColorRect" parent="GridContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+color = Color(0.190762, 0.190762, 0.190762, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GridContainer/VBoxContainer/HBoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options:"
+
+[node name="psdOptions" type="OptionButton" parent="GridContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Import as Frames"
+popup/item_1/text = "Import as Flat"
+popup/item_1/id = 1
+popup/item_2/text = "Import as AnimationSprite2D"
+popup/item_2/id = 2
+popup/item_3/text = "Import as 8D Frames"
+popup/item_3/id = 3
+
 [node name="Item" type="Button" parent="GridContainer/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(115, 115)
 layout_mode = 2
 text = "Item"
 
 [node name="Frame" type="Button" parent="GridContainer/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(115, 115)
 layout_mode = 2
 text = "Frame"
 
 [node name="8DFrame" type="Button" parent="GridContainer/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(115, 115)
 layout_mode = 2
 text = "↖↑↗
 ← 8D Frame→
 ↙  ↓  ↘"
+
+[node name="Import" type="Button" parent="GridContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Import"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
@@ -97,13 +191,11 @@ title = "Open a File"
 size = Vector2i(648, 360)
 ok_button_text = "Open"
 file_mode = 0
-root_subfolder = "res://psd_folder/"
+access = 2
 filters = PackedStringArray("*psd ; Layers")
 show_hidden_files = true
 use_native_dialog = true
 
-[connection signal="pressed" from="GridContainer/VBoxContainer/DefaultFileSystem" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="GridContainer/VBoxContainer/HBoxContainer/Item" to="." method="_on_item_pressed"]
-[connection signal="pressed" from="GridContainer/VBoxContainer/HBoxContainer/Frame" to="." method="_on_frame_pressed"]
-[connection signal="pressed" from="GridContainer/VBoxContainer/HBoxContainer/8DFrame" to="." method="_on_d_frame_pressed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/DefaultFileSystem" to="." method="_on_default_file_system_pressed"]
+[connection signal="pressed" from="GridContainer/VBoxContainer/Import" to="." method="_on_import_pressed"]
 [connection signal="confirmed" from="FileDialog" to="." method="_on_file_dialog_confirmed"]

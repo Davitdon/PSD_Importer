@@ -1,0 +1,125 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Davimation/1.0.0": {
+        "dependencies": {
+          "Godot.SourceGenerators": "4.3.0",
+          "GodotSharp": "4.3.0",
+          "GodotSharpEditor": "4.3.0",
+          "System.Drawing.Common": "6.0.0"
+        },
+        "runtime": {
+          "Davimation.dll": {}
+        }
+      },
+      "Godot.SourceGenerators/4.3.0": {},
+      "GodotSharp/4.3.0": {
+        "runtime": {
+          "lib/net6.0/GodotSharp.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        }
+      },
+      "GodotSharpEditor/4.3.0": {
+        "dependencies": {
+          "GodotSharp": "4.3.0"
+        },
+        "runtime": {
+          "lib/net6.0/GodotSharpEditor.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        }
+      },
+      "Microsoft.Win32.SystemEvents/6.0.0": {
+        "runtime": {
+          "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
+      "System.Drawing.Common/6.0.0": {
+        "dependencies": {
+          "Microsoft.Win32.SystemEvents": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/System.Drawing.Common.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/net6.0/System.Drawing.Common.dll": {
+            "rid": "unix",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          },
+          "runtimes/win/lib/net6.0/System.Drawing.Common.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Davimation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Godot.SourceGenerators/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fLDNOAo/kpL1JtGXP6b2M48dobzb5YmKSRLXKDt+td8qegu0Ao3H25avoySVmrb52d7zpe8yvgMwba7QMhqnqQ==",
+      "path": "godot.sourcegenerators/4.3.0",
+      "hashPath": "godot.sourcegenerators.4.3.0.nupkg.sha512"
+    },
+    "GodotSharp/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mEwRmNIG2k/yPfkFencEkNVXpHCa+uETHkIQcq0MxcsfwJQZ4HueFU5Q9CYDIdd5YrRPqjwuyxbsuD6Je8lfdQ==",
+      "path": "godotsharp/4.3.0",
+      "hashPath": "godotsharp.4.3.0.nupkg.sha512"
+    },
+    "GodotSharpEditor/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-r7A3lszHS9/gIWoOb7w+MNtEjrD/NRX+9ACHq01GD2+lctu6eHsmlSTA0Ah1bjJDKs9rDZeSq+42zwXvtBsPzQ==",
+      "path": "godotsharpeditor/4.3.0",
+      "hashPath": "godotsharpeditor.4.3.0.nupkg.sha512"
+    },
+    "Microsoft.Win32.SystemEvents/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
+      "path": "microsoft.win32.systemevents/6.0.0",
+      "hashPath": "microsoft.win32.systemevents.6.0.0.nupkg.sha512"
+    },
+    "System.Drawing.Common/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NfuoKUiP2nUWwKZN6twGqXioIe1zVD0RIj2t976A+czLHr2nY454RwwXs6JU9Htc6mwqL6Dn/nEL3dpVf2jOhg==",
+      "path": "system.drawing.common/6.0.0",
+      "hashPath": "system.drawing.common.6.0.0.nupkg.sha512"
+    }
+  }
+}
