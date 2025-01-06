@@ -18,3 +18,5 @@ https://www.imagemagick.org
 something else I forgot
 
 Yeah I need to find the transform and depth in the source file, if you find it, I can update the psd_importer, to make frames work properly
+
+https://youtu.be/FSfKBb7HHos 
